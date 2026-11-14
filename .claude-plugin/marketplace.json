@@ -1,0 +1,8 @@
+{
+  "name": "avineon",
+  "description": "Avineon's agent skills for FME, with the Avineon MCP server",
+  "owner": { "name": "Avineon", "url": "https://www.avineon-tensing.com" },
+  "plugins": [
+    { "name": "avineon", "source": ".", "description": "FME agent skills and the Avineon MCP server" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "avineon",
+  "displayName": "Avineon FME skills",
+  "description": "Agent skills for FME tasks (workspace planning, licences, training, FME Flow Hosted costs, FME and MCP) and the Avineon MCP server they use.",
+  "author": {
+    "name": "Avineon",
+    "url": "https://www.avineon-tensing.com"
+  },
+  "homepage": "https://agents.avineon.solutions/skills",
+  "keywords": [
+    "fme",
+    "gis",
+    "geospatial",
+    "mcp"
+  ],
+  "mcpServers": {
+    "avineon": {
+      "type": "http",
+      "url": "https://agents.avineon.solutions/mcp"
+    }
+  }
+}
