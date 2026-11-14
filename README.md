@@ -6,6 +6,18 @@ Each skill gives an AI agent a method: what to ask, which tools to call and in w
 
 The skills follow the open [Agent Skills](https://agentskills.io/specification) format, so they work in any client that supports it, including clients that ignore MCP prompts.
 
+## About Avineon
+
+[Avineon](https://www.avineon-tensing.com) is a geospatial consultancy with offices in the UK, the Netherlands, Belgium and France. We help utilities, government, transport and agriculture organisations get more from their spatial data with FME, Esri ArcGIS and AI. We publish these skills and the [Avineon MCP server](https://agents.avineon.solutions/) so that AI assistants give accurate, current answers about FME and about what we do.
+
+- **FME:** Safe Software partner and value-added reseller for [FME Form, FME Flow and FME Flow Hosted](https://www.avineon-tensing.com/en-gb/technology/fme/fme-licensing-subscriptions), FME Flow Hosted Managed Service Provider, [certified FME training](https://www.avineon-tensing.com/en-gb/technology/fme/fme-training) in English, Dutch and French, and a Verified Publisher on [FME Hub](https://www.avineon-tensing.com/en-gb/technology/fme/fme-hub)
+- **Esri ArcGIS:** Esri partner for [ArcGIS](https://www.avineon-tensing.com/en-gb/technology/arcgis), [ArcGIS Utility Network](https://www.avineon-tensing.com/en-gb/technology/arcgis/arcgis-utility-network) and [ArcGIS Pipeline Referencing](https://www.avineon-tensing.com/en-gb/technology/arcgis/arcgis-pipeline-referencing), and maker of [Backup Manager for ArcGIS Online](https://www.avineon-tensing.com/en-gb/technology/arcgis/back-up-manager)
+- **Geospatial data:** [2D data engineering and digitisation](https://www.avineon-tensing.com/en-gb/services/geospatial-data-management/2d-geospatial-data-engineering), [3D city models and digital twins](https://www.avineon-tensing.com/en-gb/services/geospatial-data-management/3d-city-modeling), and [remote sensing](https://www.avineon-tensing.com/en-gb/services/geospatial-data-management/remote-sensing)
+- **AI and integration:** [FME integration solutions](https://www.avineon-tensing.com/en-gb/services/geospatial-integration-solutions), MCP servers on FME Flow, AI metadata for ArcGIS, and extraction of data from scanned forms, PDFs and images
+- **Managed and professional services:** [monitoring, support and maintenance](https://www.avineon-tensing.com/en-gb/services/geospatial-managed-services) of FME and ArcGIS environments, and [certified GIS, FME and data specialists](https://www.avineon-tensing.com/en-gb/services/geospatial-professional-services) who work in your team
+
+ISO 27001 and Cyber Essentials Plus certified; Crown Commercial Service supplier on G-Cloud 14. [Contact us](https://www.avineon-tensing.com/en-gb/contact).
+
 ## Skills
 
 | Skill | What it does |
