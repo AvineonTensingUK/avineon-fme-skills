@@ -15,14 +15,17 @@ Check that the Avineon MCP server's tools are available (`find_transformers_for_
 
 ## Method
 
+If the user asks a direct question (for example "is the FeatureMerger deprecated?"), answer it first from `get_transformer_details`, then plan.
+
 1. **Clarify the task.** You need three things. Ask only for what is missing, in one short message:
    - the source: format, system, and roughly how much data
    - the target: format or system, and the schema if it matters
-   - the transformation: what has to happen in between (joins, geometry work, validation, filtering, reprojection)
-2. **Get candidates.** Call `find_transformers_for_task` with the task in plain words, including the formats. Note the suggested transformers, any `readers_and_writers`, and the example chains.
+   - the transformation: what has to happen in between (joins, geometry work, validation, filtering, reprojection), and any web service it depends on (a geocoding or other API)
+   Also ask the FME version if a deprecation or a new transformer may matter, and how often it runs if that decides insert or update.
+2. **Get candidates.** Call `find_transformers_for_task` with the task in plain words, including the formats. Note the suggested transformers, any `readers_and_writers`, and the example chains. The suggestions are a starting list, not a plan: if the transformer for the main step is missing, find it with `search_fme_transformers` and the capability (for example "geocode").
 3. **Check each key transformer.** Call `get_transformer_details` for every transformer you will put in the plan (usually three to eight). Use the description, the documentation link and `commonly_preceded_by` / `commonly_followed_by` to confirm the order. If a name is not found, use one of the `did_you_mean` names, or `search_fme_transformers` with the capability you need.
-4. **Flag deprecated or renamed transformers.** If a description says a transformer is deprecated or replaced, or the result has `now_called`, use the successor in the plan and say which one it replaces. If the result has `safe_transformer: false`, say it is not a Safe Software transformer (a custom or FME Hub transformer) and offer a built-in alternative where one exists.
-5. **Find the reader and writer documentation.** Call `search_fme_docs` with the format and "reader" or "writer" (for example "PostGIS writer"), with `kind` set to `documentation`, for Safe Software's pages on the formats and their parameters. Add `support` articles when the task has a known pitfall.
+4. **Flag deprecated or renamed transformers.** If a description says a transformer is deprecated or replaced, or the result has `now_called`, use the successor in the plan and say which one it replaces. If the result has `safe_transformer: false`, or the description says it is not a Safe or Official/Verified FME Hub transformer, say it is a custom or community transformer and offer a built-in alternative where one exists. If the successor is an FME Hub package that the tools can't link, name it as the description does, say you couldn't confirm a link, and suggest searching FME Hub for it. If `in_catalogue` is false, the transformer was found in Safe's documentation only: use its link, and say usage figures aren't available.
+5. **Find the reader and writer documentation.** Call `search_fme_docs` with the format and "reader" or "writer" (for example "PostGIS writer"), with `kind` set to `documentation`, for Safe Software's pages on the formats and their parameters (the results list the matching sections of each page). Add `support` articles when the task has a known pitfall. If a format's reader or writer is marked deprecated, say so and use the one Safe names instead.
 6. **Write the plan.**
    - Readers: format and the key settings to choose
    - The transformer chain, in order, one line each: what it does in this workspace

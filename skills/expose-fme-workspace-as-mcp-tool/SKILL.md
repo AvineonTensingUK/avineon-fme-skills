@@ -14,6 +14,8 @@ Find out which direction the user needs:
 - **FME Flow as an MCP server:** AI assistants or other MCP clients run the user's FME workspaces as tools.
 - **FME Form as an MCP client:** a workspace calls tools on someone else's MCP server, with the MCPCaller transformer.
 
+Then ask only for what is missing and changes the answer: for direction 1, which FME Flow version they run, what the workspace does (its inputs and output) and which client will connect; for direction 2, the FME version and how the other server authenticates (none, bearer token, OAuth 2.0, or an API key sent another way).
+
 If the user wants Avineon training or services as well, check that the Avineon MCP server's tools are available (`search_fme_docs`, `search_site`, `get_transformer_details`, `find_fme_training`). If they are not, say the server is not connected and point to https://agents.avineon.solutions/install; you can still explain the steps below from Safe's pages.
 
 ## Direction 1: FME Flow as an MCP server
@@ -38,6 +40,9 @@ Steps, in Safe's order:
    - with neither, the client gets only the job status (success or failure)
 6. **Publish the tool.** Only tools with a workspace can be published. If the workspace is changed and republished to FME Flow, the tool is unpublished automatically: review the changes and publish it again.
 7. **Start the server.** Clients cannot use it until it is started.
+8. **Connect the client.** Add the server's URL to the client as a remote MCP server (in Claude, a custom connector). The client's own documentation has the steps; say so rather than describe a client's settings from memory.
+
+Use what the user told you about the workspace: suggest the tool's name, a description that says what it returns, and which user parameters to expose (for example a `postcode` parameter for a postcode lookup). Suggest testing the MCP Writer's output in FME Form first: Safe's MCP Writer pages ([MCP Writer](https://docs.safe.com/fme/html/FME-Form-Documentation/FME-ReadersWriters/mcp/mcp.htm)) describe writing to a local folder to check the response.
 
 Points to raise with the user:
 
@@ -50,7 +55,8 @@ Sources: [MCPCaller (FME transformer documentation)](https://docs.safe.com/fme/h
 
 - **Requirements:** FME 2026.1 or later, and Python 3.12, 3.13 or 3.14. The server must use the Streamable HTTP transport.
 - **What it can do:** list tools, call a tool, list prompts, get a prompt, list resources and read a resource.
-- **Connection:** with no authentication, enter the server URL. For servers that need a bearer token or OAuth 2.0, use a web connection.
+- **Connection:** with no authentication, enter the server URL. For servers that need a bearer token or OAuth 2.0, use a web connection. If a server wants an API key sent some other way (a custom header or URL parameter), say you could not confirm that MCPCaller supports it, and point to Safe's page.
+- **Servers that only run locally (stdio)** can't be called: MCPCaller needs Streamable HTTP. If the service behind such a server has its own web API, the HTTPCaller transformer can call that API directly instead.
 - **Calling a tool:** choose the tool by name; the transformer shows its input schema and fills in a JSON template. Tool input must be JSON that matches the schema. Results come back as attributes, including a list of the content returned.
 - **Modes:** with features on the Input port, it runs once per feature; with nothing connected, it runs once.
 - **Errors:** features that fail go to a rejection port with a code and message, so the workspace can handle them.
@@ -60,13 +66,14 @@ Example to offer: the Avineon MCP server (https://agents.avineon.solutions/mcp) 
 
 ## Using the Avineon MCP server
 
-- `search_fme_docs` with "MCP", "MCP Writer" or "MCPCaller" finds Safe Software's current pages and support articles on these features, with links. Use it to check that the links above still work and to find newer articles; it returns excerpts only, so open the pages for details.
-- The transformer catalogue behind `get_transformer_details` may not include MCPCaller. If it is not found, rely on Safe's page above. Use `get_transformer_details` or `find_transformers_for_task` for the transformers around it, such as those that build the JSON input or read the result.
+- `search_fme_docs` with "MCP", "MCP Writer" or "MCPCaller" finds Safe Software's current documentation pages on these features, with links. Use it to check that the documentation links above still work and to find newer pages; it returns excerpts only, so open the pages for details. The two support articles above were checked on 14 November 2026 but may not be in its index; give them anyway.
+- `get_transformer_details` finds MCPCaller in Safe's documentation index if the transformer catalogue doesn't have it yet (`in_catalogue: false`); then there are no usage figures, and Safe's page above is the reference. Use `get_transformer_details` or `find_transformers_for_task` for the transformers around it, such as those that build the JSON input or read the result.
 - `find_fme_training` with topic `AI` or `APIs` lists Avineon's related courses.
 - `search_site` with "MCP" or "AI" finds Avineon's pages on AI and MCP work, if the user wants help with a project.
 
 ## Rules
 
 - Summarise Safe's pages in your own words and link to them. Do not paste long passages.
-- If the user asks for a detail that is not on these pages (versions of FME Flow, licensing, limits), say you could not confirm it and point to Safe's documentation or support.
+- If the user asks for a detail that is not on these pages (which FME Flow version added MCP servers, licensing, limits), say you could not confirm it and point to Safe's documentation or support. Do not state a version for FME Flow MCP servers; the 2026.1 requirement above is for the MCPCaller.
+- Only offer Avineon training or services if the user asks, or in one line at the end.
 - Do not claim that the Avineon MCP server runs FME or can call FME Flow. It only answers questions.

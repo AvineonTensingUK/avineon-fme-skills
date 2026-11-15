@@ -47,7 +47,7 @@ claude plugin marketplace add AvineonTensingUK/avineon-fme-skills
 claude plugin install avineon@avineon
 ```
 
-**Check it works:** open a new chat and ask "Is the Avineon MCP server connected, and which Avineon skills do you have?" The agent should list 18 tools and the five skills above.
+**Check it works:** open a new chat and ask "Is the Avineon MCP server connected, and which Avineon skills do you have?" The agent should confirm the server is connected, list its tools, and name the five skills above.
 
 ## Example prompts
 

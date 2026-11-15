@@ -17,9 +17,10 @@ Check that the Avineon MCP server's tools are available (`find_fme_training`, `l
    - experience: new to FME, some use, or regular use (and of which product)
    - goal: what they want to be able to do (translate data, write maintainable workspaces, automate on FME Flow, call APIs, use AI, work inside ArcGIS Pro)
    - country or language, since it decides the course language and currency
-2. **Find courses.** Call `find_fme_training` with `level`, `product` or `topic` where they fit, and `locale` for their country. If nothing matches, the tool returns all courses: pick from those.
-3. **Propose a path** of one to three courses in order, each with: name, level, duration, price and upcoming dates exactly as returned, and the course or booking link. Say in one line why each course fits the goal.
-4. **Free options.** If the user is new or wants to try first, mention the FME Skill Booster workshops if the tool returned them. For other events, call `list_events`.
+2. **Find courses.** Call `find_fme_training` with `level`, `product` or `topic` where they fit, and `locale` for their country. If nothing matches, the tool returns all courses: pick from those. A filter can return neighbouring courses (`product` "FME Flow" also returns the API and AI courses): keep only those that fit the goal. If the user works in ArcGIS Pro, also look at the ArcGIS Data Interoperability courses.
+   If a course in the user's language has no dates, call `find_fme_training` again with `locale` en-gb: the same course may have English dates. Give both, with the `language_note`.
+3. **Propose a path** of one to three courses in order, each with: name, level, duration, price and upcoming dates exactly as returned, and the course or booking link. Say in one line why each course fits the goal. When one course should come before another, suggest dates that keep that order. Leave out dates marked full, or say they are full.
+4. **Free options.** Mention the FME Skill Booster workshops if the tool returned them and the user is new, wants to try first, or the current topic fits their goal. Call `list_events` for the current Skill Booster topic, other events and recorded sessions.
 5. **How to book.** Give the booking link or form, and the `book_or_ask` contact for in-house or group training.
 
 ## Rules
@@ -27,4 +28,5 @@ Check that the Avineon MCP server's tools are available (`find_fme_training`, `l
 - Give prices and dates only as the tools return them. If a course has no dates, say "see the course page or ask for dates". Note that VAT is added where it applies.
 - If a course is only available in English for a non-English locale, pass on the tool's `language_note`.
 - Courses booked through Esri UK (ArcGIS Data Interoperability) have their price on Esri UK's page: say so instead of giving a price.
+- The tools don't say whether a course is online or in person. If the user asks, say it is on the course page or to ask Avineon.
 - Do not book anything. Give the link.
