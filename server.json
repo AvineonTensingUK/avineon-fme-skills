@@ -1,0 +1,8 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "solutions.avineon/mcp",
+  "title": "Avineon: FME tools and training",
+  "description": "FME transformers and docs search, licences, Flow Hosted costs, training, Esri: AI-ready data",
+  "websiteUrl": "https://agents.avineon.solutions/",
+  "remotes": [{ "type": "streamable-http", "url": "https://agents.avineon.solutions/mcp" }]
+}
